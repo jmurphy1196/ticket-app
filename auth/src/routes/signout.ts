@@ -4,10 +4,11 @@ const router = express.Router();
 
 const baseUserUrl = baseRouteName.baseUserUrl;
 
-router.get(
+router.post(
   `${baseUserUrl}/signout`,
   (req: Request, res: Response, next: NextFunction) => {
-    res.send({ user: "jimbo!" });
+    req.session = null;
+    return res.status(200).send({});
   }
 );
 

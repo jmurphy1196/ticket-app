@@ -20,10 +20,22 @@ const requiredString = {
   required: true,
 };
 
-const userSchema = new mongoose.Schema({
-  email: requiredString,
-  password: requiredString,
-});
+const userSchema = new mongoose.Schema(
+  {
+    email: requiredString,
+    password: requiredString,
+  },
+  {
+    toJSON: {
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.password;
+        delete ret.__v;
+      },
+    },
+  }
+);
 
 userSchema.pre("save", async function (done) {
   if (this.isModified("password")) {
