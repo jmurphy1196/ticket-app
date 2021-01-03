@@ -3,7 +3,7 @@ import { json } from "body-parser";
 import morgan from "morgan";
 import cookieSession from "cookie-session";
 import "express-async-errors";
-import { errorHandler } from "./middlewares/error-handler";
+import { errorHandler } from "@tkmaster/common";
 import {
   currentUserRouter,
   signinRouter,
@@ -11,7 +11,7 @@ import {
   signupRouter,
 } from "./routes/index";
 import { config } from "dotenv";
-import { NotFoundError } from "./errors/not-found-error";
+import { NotFoundError } from "@tkmaster/common";
 config();
 const app = express();
 

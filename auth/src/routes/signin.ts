@@ -1,10 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
 import baseRouteName from "../util/route-config";
-import { body, validationResult } from "express-validator";
-import { RequestValidationError } from "../errors/request-validation-error";
+import { body } from "express-validator";
 import User from "../models/user";
-import { validateRequest } from "../middlewares/validate-request";
-import { BadRequestError } from "../errors/bad-request-error";
+import { validateRequest } from "@tkmaster/common";
+import { BadRequestError } from "@tkmaster/common";
 import jwt from "jsonwebtoken";
 import Password from "../util/password";
 const router = express.Router();

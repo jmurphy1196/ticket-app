@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import baseRouteName from "../util/route-config";
-import { currentUser } from "../middlewares/current-user";
+import { currentUser } from "@tkmaster/common";
 
 const router = express.Router();
 

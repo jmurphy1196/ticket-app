@@ -1,13 +1,10 @@
 import express, { NextFunction, Request, Response } from "express";
 import baseRouteName from "../util/route-config";
-import { body, ValidationError, validationResult } from "express-validator";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
+import { body } from "express-validator";
 import jwt from "jsonwebtoken";
-import { RequestValidationError } from "../errors/request-validation-error";
 import User from "../models/user";
-import { BadRequestError } from "../errors/bad-request-error";
-import Password from "../util/password";
-import { validateRequest } from "../middlewares/validate-request";
+import { BadRequestError } from "@tkmaster/common";
+import { validateRequest } from "@tkmaster/common";
 const router = express.Router();
 
 const baseUserUrl = baseRouteName.baseUserUrl;
