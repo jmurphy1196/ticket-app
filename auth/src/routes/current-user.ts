@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import baseRouteName from "../util/route-config";
-import jwt from "jsonwebtoken";
+import { currentUser } from "../middlewares/current-user";
 
 const router = express.Router();
 
@@ -8,14 +8,11 @@ const baseUserUrl = baseRouteName.baseUserUrl;
 
 router.get(
   `${baseUserUrl}/currentuser`,
+  currentUser,
   (req: Request, res: Response, next: NextFunction) => {
-    if (!req.session || !req.session.jwt) {
-      return res.send({ currentUser: null });
-    }
-    try {
-      const token = jwt.verify(req.session.jwt, process.env.JWT_KEY!);
-      res.send({ currentUser: token });
-    } catch (err) {
+    if (req.currentUser) {
+      return res.send({ currentUser: { ...req.currentUser } });
+    } else {
       res.send({ currentUser: null });
     }
   }
