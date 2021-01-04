@@ -6,6 +6,10 @@ import "express-async-errors";
 import { errorHandler } from "@tkmaster/common";
 import { config } from "dotenv";
 import { NotFoundError } from "@tkmaster/common";
+import { createTicketRouter } from "./routes/new";
+import { showTicketRouter } from "./routes/show";
+import { indexTicketRouter } from "./routes";
+import { updateTicketRouter } from "./routes/update";
 config();
 const app = express();
 
@@ -18,6 +22,11 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
+
+app.use(createTicketRouter);
+app.use(updateTicketRouter);
+app.use(showTicketRouter);
+app.use(indexTicketRouter);
 
 app.all("*", async () => {
   const err = new NotFoundError();

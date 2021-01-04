@@ -6,8 +6,9 @@ config();
 
 (async () => {
   if (!process.env.JWT_KEY) throw new Error("JWT_KEY is undefined");
+  if (!process.env.MONGO_URI) throw new Error("MONGO_URI is undefined");
   try {
-    await mongoose.connect("mongodb://auth-mongo-serv:27017", {
+    await mongoose.connect(process.env.MONGO_URI || "", {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
@@ -18,6 +19,6 @@ config();
   }
 
   app.listen(3000, () => {
-    console.log("server is lisening on port 3000!!!");
+    console.log("tickets server is lisening on port 3000!!!");
   });
 })();

@@ -1,12 +1,11 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
-import app from "../app";
-import request from "supertest";
-
+import jwt from "jsonwebtoken";
 declare global {
   namespace NodeJS {
     interface Global {
-      signup(): Promise<string[]>;
+      signup(id?: string): string[];
+      createMongoId(): string;
     }
   }
 }
@@ -35,16 +34,30 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-global.signup = async () => {
-  const email = "test@test.com";
-  const password = "password";
-
-  const response = await request(app).post("/api/users/signup").send({
-    email,
-    password,
-  });
-
-  const cookie = response.get("Set-Cookie");
-
-  return cookie;
+global.signup = (id = "") => {
+  //takes an optional id, otherwise will generate a new ID
+  let userId;
+  if (id === "") {
+    userId = mongoose.Types.ObjectId().toHexString();
+  } else {
+    userId = id;
+  }
+  // build a jwt payload
+  const payload = {
+    id: userId,
+    password: "testing",
+  };
+  //create the jwt
+  const token = jwt.sign(payload, process.env.JWT_KEY!);
+  //build session obj
+  const session = { jwt: token };
+  //turn into json
+  const sessionJSON = JSON.stringify(session);
+  // take json and encode it as base64
+  const base64 = Buffer.from(sessionJSON).toString("base64");
+  //return cookie with encoded data
+  return [`express:sess=${base64}`];
+};
+global.createMongoId = () => {
+  return new mongoose.Types.ObjectId().toHexString();
 };
