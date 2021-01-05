@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../../app";
+import natsWrapper from "../../nats-wrapper";
 
 const createTicket = () => {
   return request(app).post("/api/tickets").set("Cookie", global.signup()).send({
@@ -77,4 +78,24 @@ it("returns a  if the user updates the ticket", async () => {
 
   expect(response.body.title).toEqual("a new title");
   expect(response.body.price).toEqual(34);
+});
+
+it("publishes an event", async () => {
+  const ticket = await createTicket();
+  const userId = ticket.body.userId;
+  const ticketId = ticket.body.id;
+
+  const response = await request(app)
+    .put(`/api/tickets/${ticketId}`)
+    .set("Cookie", global.signup(userId))
+    .send({
+      title: "a new title",
+      price: 34,
+    })
+    .expect(200);
+
+  expect(response.body.title).toEqual("a new title");
+  expect(response.body.price).toEqual(34);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
 });

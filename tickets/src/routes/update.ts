@@ -8,6 +8,8 @@ import {
 import express, { Request, Response, NextFunction } from "express";
 import { body } from "express-validator";
 import Ticket from "../models/ticket";
+import TicketUpdatedPublisher from "../events/publishers/ticket-created-publisher";
+import natsWrapper from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -38,6 +40,9 @@ router.put(
     });
 
     await ticket.save();
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      ...ticket,
+    });
 
     res.status(200).send(ticket);
   }

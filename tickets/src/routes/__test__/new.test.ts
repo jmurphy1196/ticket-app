@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../../app";
 import Ticket from "../../models/ticket";
-
+import natsWrapper from "../../nats-wrapper";
 it(" /api/tickets post requests", async () => {
   const cookie = global.signup();
   const response = await request(app)
@@ -67,7 +67,6 @@ it("returns an error if invalid price is provided", async () => {
 });
 
 it("creates a ticket with valid inputs", async () => {
-  // TODO add in a check to make sure ticket is saved with a code of 201
   let tickets = await Ticket.find({});
 
   expect(tickets.length).toEqual(0);
@@ -82,4 +81,18 @@ it("creates a ticket with valid inputs", async () => {
     .expect(201);
   tickets = await Ticket.find({});
   expect(tickets.length).toEqual(1);
+});
+
+it("publishes an event", async () => {
+  const title = "asdkljf";
+
+  await request(app)
+    .post("/api/tickets")
+    .set("Cookie", global.signup())
+    .send({
+      title,
+      price: 34,
+    })
+    .expect(201);
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
 });
