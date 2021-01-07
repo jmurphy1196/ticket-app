@@ -5,7 +5,11 @@ import app from "./app";
 import natsWrapper from "./nats-wrapper";
 import { randomBytes } from "crypto";
 import checkEnv from "./util/check-env";
+import TicketCreatedListener from "./events/listeners/ticket-created-listener";
+import TicketUpdatedListener from "./events/listeners/ticket-updated-listener";
 config();
+
+console.log("im new again");
 
 (async () => {
   //check necessary env variables, if one is not found service will not start and throw a new error
@@ -23,6 +27,9 @@ config();
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
     await mongoose.connect(process.env.MONGO_URI || "", {
       useNewUrlParser: true,
       useCreateIndex: true,

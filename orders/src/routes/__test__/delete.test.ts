@@ -1,6 +1,5 @@
 import request from "supertest";
 import app from "../../app";
-import { OrderStatus } from "@tkmaster/common";
 import natsWrapper from "../../nats-wrapper";
 
 it("a user can cancel an order they created", async () => {

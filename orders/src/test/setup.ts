@@ -70,6 +70,7 @@ global.createMongoId = () => {
 
 global.createTicket = async () => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "a new ticket!",
     price: 34,
   });
