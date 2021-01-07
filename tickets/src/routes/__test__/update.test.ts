@@ -1,6 +1,7 @@
 import request from "supertest";
 import app from "../../app";
 import natsWrapper from "../../nats-wrapper";
+import Ticket, { TicketDoc } from "../../models/ticket";
 
 const createTicket = () => {
   return request(app).post("/api/tickets").set("Cookie", global.signup()).send({
@@ -98,4 +99,24 @@ it("publishes an event", async () => {
   expect(response.body.price).toEqual(34);
 
   expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
+
+it("rejects updates if the ticket is reserved", async () => {
+  const ticketResponse = await createTicket();
+  const ticketFound: TicketDoc = await Ticket.findById(ticketResponse.body.id);
+
+  ticketFound.set({ orderId: global.createMongoId() });
+  console.log("this is the ticket!!!");
+  console.log(ticketFound);
+  await ticketFound.save();
+
+  const response = await request(app)
+    .put(`/api/tickets/${ticketFound.id}`)
+    .set("Cookie", global.signup())
+    .send({
+      title: "slkdjfkldsj",
+      price: 34,
+    });
+  console.log("THIS IS THE NEW TST");
+  expect(response.status).toEqual(400);
 });

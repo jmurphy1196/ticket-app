@@ -1,4 +1,5 @@
 import {
+  BadRequestError,
   currentUser,
   NotAuthorizedError,
   NotFoundError,
@@ -7,8 +8,8 @@ import {
 } from "@tkmaster/common";
 import express, { Request, Response, NextFunction } from "express";
 import { body } from "express-validator";
-import Ticket from "../models/ticket";
-import TicketUpdatedPublisher from "../events/publishers/ticket-created-publisher";
+import Ticket, { TicketDoc } from "../models/ticket";
+import TicketUpdatedPublisher from "../events/publishers/ticket-updated-publisher";
 import natsWrapper from "../nats-wrapper";
 
 const router = express.Router();
@@ -25,13 +26,12 @@ router.put(
   ],
   validateRequest,
   async (req: Request, res: Response, next: NextFunction) => {
-    const ticket = await Ticket.findById(req.params.id);
-    if (!ticket) {
-      throw new NotFoundError();
-    }
-    if (ticket.userId !== req.currentUser?.id) {
-      throw new NotAuthorizedError();
-    }
+    const ticket: TicketDoc = await Ticket.findById(req.params.id);
+    if (!ticket) throw new NotFoundError();
+
+    if (ticket.orderId)
+      throw new BadRequestError("ticket is currently being ordered");
+    if (ticket.userId !== req.currentUser?.id) throw new NotAuthorizedError();
 
     const { title, price } = req.body;
     ticket.set({
@@ -41,7 +41,11 @@ router.put(
 
     await ticket.save();
     new TicketUpdatedPublisher(natsWrapper.client).publish({
-      ...ticket,
+      id: ticket.id,
+      price: ticket.price,
+      title: ticket.title,
+      userId: req.currentUser!.id,
+      version: ticket.version,
     });
 
     res.status(200).send(ticket);

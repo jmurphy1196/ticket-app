@@ -1,5 +1,5 @@
-import { Subjects, Publisher, TicketCreatedEvent } from "@tkmaster/common";
+import { Subjects, Publisher, TicketUpdatedEvent } from "@tkmaster/common";
 
-export default class TicketUpdatedPublisher extends Publisher<TicketCreatedEvent> {
-  readonly subject: Subjects.TicketCreated = Subjects.TicketCreated;
+export default class TicketUpdatedPublisher extends Publisher<TicketUpdatedEvent> {
+  readonly subject: Subjects.TicketUpdated = Subjects.TicketUpdated;
 }

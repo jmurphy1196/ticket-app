@@ -4,6 +4,8 @@ import { config } from "dotenv";
 import app from "./app";
 import natsWrapper from "./nats-wrapper";
 import { randomBytes } from "crypto";
+import OrderCreatedListener from "./events/listeners/order-created-listener";
+import OrderCancelledListener from "./events/listeners/order-cancelled-listener";
 config();
 
 (async () => {
@@ -27,6 +29,9 @@ config();
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new OrderCancelledListener(natsWrapper.client).listen();
+    new OrderCreatedListener(natsWrapper.client).listen();
     await mongoose.connect(process.env.MONGO_URI || "", {
       useNewUrlParser: true,
       useCreateIndex: true,
