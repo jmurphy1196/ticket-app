@@ -44,7 +44,7 @@ router.post(
     await order.save();
     console.log("___THIS IS ORDER -> TICKET ID");
 
-    new OrderCreatedPublisher(natsWrapper.client).publish({
+    await new OrderCreatedPublisher(natsWrapper.client).publish({
       id: order._id,
       status: order.status,
       userId: order.userId,
@@ -58,7 +58,7 @@ router.post(
     console.log("ORDER SAVED");
     console.log(order);
 
-    res.status(201).send({ ...order, id: order._id.toString() });
+    res.status(201).send(order);
   }
 );
 

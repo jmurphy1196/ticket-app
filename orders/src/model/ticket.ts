@@ -62,11 +62,7 @@ ticketSchema.methods.isReserved = async function () {
   const existingOrder = await Order.findOne({
     ticket: this,
     status: {
-      $in: [
-        OrderStatus.Created,
-        OrderStatus.AwaitingPayment,
-        OrderStatus.Created,
-      ],
+      $in: [OrderStatus.Created, OrderStatus.AwaitingPayment],
     },
   });
   console.log("---THIS IS THE EXISTING ORDER ---");
