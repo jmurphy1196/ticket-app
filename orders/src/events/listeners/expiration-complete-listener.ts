@@ -16,8 +16,10 @@ export default class ExpirationCompleteListener extends Listener<ExpirationCompl
     const order = await Order.findById(data.orderId).populate("ticket");
     if (!order) throw new Error("order not found");
 
-    if (order.status === OrderStatus.Complete)
-      throw new Error("Order has already been paid");
+    if (order.status === OrderStatus.Complete) {
+      //orders has already been paid
+      return msg.ack();
+    }
 
     order.set({ status: OrderStatus.Cancelled });
     await order.save();

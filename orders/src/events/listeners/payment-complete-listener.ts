@@ -9,6 +9,7 @@ export default class PaymentCreatedListener extends Listener<PaymentCreatedEvent
   queueGroupName = queueGroupName;
 
   async onMessage(data: PaymentCreatedEvent["data"], msg: Message) {
+    console.log(data.orderId);
     const order = await Order.findById(data.orderId);
 
     if (!order) throw new Error("Order not found");
