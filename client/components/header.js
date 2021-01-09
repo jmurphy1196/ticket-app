@@ -6,6 +6,14 @@ export default ({ currentUser }) => {
       href: "/auth/signin",
     },
     currentUser && {
+      label: "Sell",
+      href: "/tickets/new",
+    },
+    currentUser && {
+      label: "My Orders",
+      href: "/orders",
+    },
+    currentUser && {
       label: "Logout",
       href: "/auth/signout",
     },
