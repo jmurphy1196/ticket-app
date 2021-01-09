@@ -48,7 +48,7 @@ router.post(
 
     new PaymentCreatedPublisher(natsWrapper.client).publish({
       id: payment.id,
-      orderId: payment.orderid,
+      orderId: orderId,
       stripeId: charge.id,
     });
 
