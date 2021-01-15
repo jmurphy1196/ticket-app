@@ -23,6 +23,7 @@ export default class OrderCreatedListener extends Listener<OrderCreatedEvent> {
       userId: ticket.userId,
       version: ticket.version,
       orderId: ticket.orderId,
+      imageUrl: ticket.imageUrl,
     });
 
     msg.ack();

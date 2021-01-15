@@ -17,6 +17,12 @@ router.post(
       .trim()
       .isLength({ min: 5, max: 12 })
       .withMessage("invalid password"),
+    body("confirmPassword").custom(async (confirmPassword, { req }) => {
+      const password = req.body.password;
+      if (confirmPassword !== password) {
+        throw new Error("Passwords must match");
+      }
+    }),
   ],
   validateRequest,
   async (req: Request, res: Response, next: NextFunction) => {

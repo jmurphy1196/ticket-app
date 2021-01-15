@@ -16,6 +16,8 @@ config();
   if (!process.env.NATS_CLUSTER_ID)
     throw new Error("NATS_CLUSTER_ID is undefined");
   if (!process.env.NATS_URL) throw new Error("NATS_URL is undefined");
+  if (!process.env.AWS_KEY) throw new Error("AWS_KEY is undefined");
+  if (!process.env.AWS_KEY_ID) throw new Error("AWS_KEY_ID is undefined");
   try {
     const natsId = randomBytes(4).toString("hex");
     await natsWrapper.connect(

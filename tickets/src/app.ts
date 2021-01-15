@@ -3,6 +3,7 @@ import { json } from "body-parser";
 import morgan from "morgan";
 import cookieSession from "cookie-session";
 import "express-async-errors";
+import fileUpload from "express-fileupload";
 import { errorHandler } from "@tkmaster/common";
 import { config } from "dotenv";
 import { NotFoundError } from "@tkmaster/common";
@@ -16,6 +17,7 @@ const app = express();
 app.set("trust proxy", true);
 app.use(morgan("combined"));
 app.use(json());
+app.use(fileUpload());
 app.use(
   cookieSession({
     signed: false,
