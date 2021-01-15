@@ -16,4 +16,11 @@ jobs:
         env: 
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}    
-      - run: docker push jason1196/auth
+      - run: docker push jason1196/auth 
+      - uses: actions/checkout@master
+      - name: Setup Linode cli
+        uses: brendon1555/setup-linode-cli@master
+        with:
+          LINODE_CLI_TOKEN: ${{ secrets.LINODE_CLI_TOKEN }}
+      - run: linode-cli --help
+        
