@@ -46,6 +46,7 @@ router.put(
       title: ticket.title,
       userId: req.currentUser!.id,
       version: ticket.version,
+      imageUrl: ticket.imageUrl,
     });
 
     res.status(200).send(ticket);

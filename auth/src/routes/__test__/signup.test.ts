@@ -6,7 +6,8 @@ it("returns a 201 on successful signup", async () => {
     .post("/api/users/signup")
     .send({
       email: "test@testing.com",
-      password: "jmm12355",
+      password: "jae12344",
+      confirmPassword: "jae12344",
     })
     .expect(201);
 });
@@ -17,6 +18,7 @@ it("returns a 400 with an invalid email", async () => {
     .send({
       email: "klsdjafkljasdlfkjads",
       password: "password",
+      confirmPassword: "password",
     })
     .expect(400);
 });
@@ -27,6 +29,7 @@ it("returns a 400 with an invalid password", async () => {
     .send({
       email: "klsdjafkljasdlfkjads",
       password: "ks",
+      confirmPassword: "ks",
     })
     .expect(400);
 });
@@ -36,7 +39,8 @@ it("disallows duplicate emails", async () => {
     .post("/api/users/signup")
     .send({
       email: "test@test.com",
-      password: "jmm12355",
+      password: "jae12344",
+      confirmPassword: "jae12344",
     })
     .expect(201);
 
@@ -44,7 +48,8 @@ it("disallows duplicate emails", async () => {
     .post("/api/users/signup")
     .send({
       email: "test@test.com",
-      password: "jmm12355",
+      password: "jae12344",
+      confirmPassword: "jae12344",
     })
     .expect(400);
 });
@@ -54,7 +59,8 @@ it("sets a cookie after successful signup", async () => {
     .post("/api/users/signup")
     .send({
       email: "test@test.com",
-      password: "jmm12355",
+      password: "jae12355",
+      confirmPassword: "jae12355",
     })
     .expect(201);
 

@@ -24,6 +24,16 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: AWS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-akey
+                  key: AWS_KEY
+            - name: AWS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-akeyid
+                  key: AWS_KEY_ID
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:

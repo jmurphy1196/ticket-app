@@ -7,6 +7,7 @@ it("invalid password returns a 400", async () => {
     .send({
       email: "test@test.com",
       password: "jmm12355",
+      confirmPassword: "jmm12355",
     })
     .expect(201);
 
@@ -35,6 +36,7 @@ it("valid login returns a 200", async () => {
     .send({
       email: "test@testing.com",
       password: "jmm12355",
+      confirmPassword: "jmm12355",
     })
     .expect(201);
 

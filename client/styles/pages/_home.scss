@@ -1,0 +1,49 @@
+.section-about {
+  background-color: $color-secondary-white;
+  padding: 25rem 0;
+  margin-top: -20vh;
+}
+.section-features {
+  padding: 20rem 0;
+  backface-visibility: hidden;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url("../../img/concert-features.png");
+  background-size: cover;
+  transform: skewY(-7deg);
+
+  margin-top: 10rem;
+  & > * {
+    transform: skewY(7deg);
+  }
+}
+.section-tickets {
+  background-color: $color-secondary-white;
+  padding: 25rem 0 15rem 0;
+  position: relative;
+
+  @include respond(tab-port) {
+    padding: 12.5rem 0 10rem 0;
+  }
+
+  .left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    @include respond(tab-port) {
+      top: 90% !important;
+    }
+  }
+  .right-arrow {
+    position: absolute;
+    transform: translateX(-100%);
+    top: 50%;
+    left: 100%;
+    @include respond(tab-port) {
+      top: 90% !important;
+    }
+  }
+}

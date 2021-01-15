@@ -42,6 +42,7 @@ global.signup = async () => {
   const response = await request(app).post("/api/users/signup").send({
     email,
     password,
+    confirmPassword: password,
   });
 
   const cookie = response.get("Set-Cookie");

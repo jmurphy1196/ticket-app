@@ -1,4 +1,33 @@
 import Link from "next/link";
+import { useState } from "react";
+import Header from "../components/header";
+import About from "../components/about";
+import Features from "../components/features";
+import HotTickets from "../components/hot-tickets/hot-tickets";
+const LandingPage = ({ currentUser, tickets }) => {
+  console.log("these are the tickets");
+  console.log(tickets);
+  return (
+    <>
+      <Header />
+      <main>
+        <About />
+        <Features />
+        <HotTickets tickets={tickets} />
+      </main>
+    </>
+  );
+};
+
+export default LandingPage;
+
+LandingPage.getInitialProps = async (ctx, client, currentUser) => {
+  const { data } = await client.get("/api/tickets?limit=3&page=1");
+  return { tickets: data };
+};
+/* 
+
+import Link from "next/link";
 
 const LandingPage = ({ currentUser, tickets }) => {
   const ticketList = tickets.map((ticket) => {
@@ -38,3 +67,4 @@ LandingPage.getInitialProps = async (ctx, client, currentUser) => {
 };
 
 export default LandingPage;
+*/

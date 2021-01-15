@@ -13,3 +13,5 @@ export default ({ req }) => {
     baseURL: "/",
   });
 };
+
+//baseURL: "http://ingress-nginx.ingress-nginx.svc.cluster.local",
