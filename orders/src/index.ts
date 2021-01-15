@@ -15,6 +15,7 @@ console.log("im new again");
 
 (async () => {
   //check necessary env variables, if one is not found service will not start and throw a new error
+  console.log("starting...");
   checkEnv();
   try {
     const natsId = randomBytes(4).toString("hex");

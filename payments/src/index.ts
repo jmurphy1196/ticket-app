@@ -7,6 +7,7 @@ import OrderCancelledListener from "./events/listeners/order-cancelled-listener"
 import OrderCreatedListener from "./events/listeners/order-created-listener";
 config();
 (async () => {
+  console.log("starting...");
   if (!process.env.JWT_KEY) throw new Error("JWT_KEY is undefined");
   if (!process.env.MONGO_URI) throw new Error("MONGO_URI is undefined");
   if (!process.env.NATS_CLIENT_ID)

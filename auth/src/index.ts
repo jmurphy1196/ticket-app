@@ -5,6 +5,7 @@ import app from "./app";
 config();
 
 (async () => {
+  console.log("starting... ");
   if (!process.env.JWT_KEY) throw new Error("JWT_KEY is undefined");
   if (!process.env.MONGO_URI) throw new Error("MONGO_URI is undefined");
   try {
