@@ -6,7 +6,8 @@ it("signout should delete cookie", async () => {
     .post("/api/users/signup")
     .send({
       email: "test@test.com",
-      password: "jmm12355",
+      password: "jae12333",
+      confirmPassword: "jae12333",
     })
     .expect(201);
 
@@ -14,7 +15,7 @@ it("signout should delete cookie", async () => {
     .post("/api/users/signin")
     .send({
       email: "test@test.com",
-      password: "jmm12355",
+      password: "jae12333",
     })
     .expect(200);
 
