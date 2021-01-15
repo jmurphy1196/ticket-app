@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3%;
+  height: 12%;
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    to right,
+    rgba($color-secondary-dark, 1),
+    rgba($color-primary-light, 1)
+  );
+  &__brand {
+    font-size: 4rem;
+    font-weight: bolder;
+    color: $color-primary-white;
+    cursor: pointer;
+  }
+  &__routes {
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    color: $color-secondary-white;
+    &__list {
+      display: flex;
+      list-style: none;
+
+      li {
+        margin: 0 2rem;
+        transition: all 0.2s;
+        padding: 5px 10px;
+        &:hover {
+          background-color: $color-secondary-white;
+          color: $color-primary-light;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

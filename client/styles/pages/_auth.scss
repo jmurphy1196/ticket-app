@@ -1,0 +1,50 @@
+.auth__background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(black, 0.8),
+      rgba(black, 0.8)
+    ),
+    url("/img/tkphoto2.jpg");
+  background-size: cover;
+}
+
+.auth__form {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 35vw;
+  background-color: $color-secondary-white;
+  padding: 0 5rem;
+  padding-top: 2rem;
+
+  &__form {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    font-size: 1.7rem;
+
+    &__group {
+      display: flex;
+      flex-direction: column;
+      text-transform: uppercase;
+    }
+  }
+  &__input {
+    height: 2.5rem;
+    outline: none;
+    border: none;
+  }
+  &__label {
+    span {
+      color: red;
+      text-transform: lowercase;
+      font-size: 1.3rem;
+    }
+  }
+}

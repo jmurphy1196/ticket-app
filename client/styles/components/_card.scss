@@ -1,0 +1,154 @@
+@import "../abstracts/variables";
+.card {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 50rem;
+  &__side {
+    height: 50rem;
+    transition: all 0.8s ease;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backface-visibility: hidden;
+    box-shadow: 0 1.5rem 4rem rgba($color: #000000, $alpha: 0.4);
+    border-radius: 2%;
+    overflow: hidden;
+    &--front {
+      background-color: $color-secondary-white;
+    }
+    &--back {
+      transform: rotateY(180deg);
+      &-1 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-secondary-dark
+        );
+      }
+      &-2 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-dark,
+          $color-primary-light
+        );
+      }
+      &-3 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-secondary-dark
+        );
+      }
+    }
+  }
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+  &:hover &__side--back {
+    transform: rotateY(0deg);
+  }
+  //front of the card
+  &__picture {
+    background-size: cover;
+    height: 25rem;
+    background-blend-mode: screen;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+    &__img {
+      height: 100%;
+      opacity: 0.6;
+    }
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        $color-primary-light,
+        $color-secondary-dark
+      );
+    }
+    &--2 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-dark,
+          $color-primary-light
+        ),
+        url("/img/card-2.jpg");
+    }
+    &--3 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-secondary-dark
+        ),
+        url("/img/card-3.jpg");
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-align: right;
+    color: $color-secondary-white;
+    position: absolute;
+    text-transform: uppercase;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+  &__heading-span {
+    padding: 1rem 1.5rem;
+    -webkit-box-decoration: clone;
+    box-decoration-break: clone;
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-secondary-dark, 0.8)
+      );
+    }
+  }
+  &__details {
+    color: black;
+    padding: 3rem;
+    ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto;
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #eee;
+        }
+      }
+    }
+  }
+  //back of the card
+  &__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+  }
+
+  &__price-box {
+    margin-bottom: 8rem;
+  }
+  &__price-only {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
+  }
+}

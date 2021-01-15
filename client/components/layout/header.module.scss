@@ -1,0 +1,41 @@
+@import "../../pages/colors.scss";
+
+nav.navbar {
+  background-color: $secondary-blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 5.5rem;
+}
+
+.brand {
+  font-size: 3rem;
+  display: flex;
+  transition: 2s ease;
+
+  a {
+    color: $primary-white;
+  }
+  cursor: pointer;
+  &:hover {
+  }
+}
+
+ul.links {
+  display: flex;
+}
+
+a.mainLink {
+  color: $primary-white;
+  padding: 1rem 1rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+
+  font-weight: bold;
+  &:hover {
+    color: $secondary-blue;
+    background-color: $primary-white;
+  }
+}

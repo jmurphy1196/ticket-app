@@ -1,0 +1,31 @@
+@import "../abstracts/variables";
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+  @include respond(tab-land) {
+    font-size: 60%;
+  }
+  @include respond(tab-port) {
+    font-size: 50%;
+  }
+  @include respond(phone) {
+    font-size: 40%;
+  }
+}
+
+body {
+  background-color: $color-secondary-white;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}

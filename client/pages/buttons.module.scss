@@ -1,0 +1,7 @@
+@import "./colors.scss";
+
+button.primary {
+  background-color: $primary-blue;
+  color: $primary-white;
+  padding: 0.5rem 1rem;
+}

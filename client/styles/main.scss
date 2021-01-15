@@ -1,0 +1,29 @@
+//abstracts
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+//layout
+@import "layout/header";
+@import "layout/grid";
+
+//base
+@import "base/base";
+@import "base/typography"; //pages
+@import "base/animations";
+@import "base/util";
+
+@import "pages/home";
+@import "pages/auth";
+@import "pages/new-ticket";
+@import "pages/orders";
+
+//components
+@import "components/button";
+@import "components/composition";
+@import "components/feature-box";
+@import "components/card";
+@import "components/navbar";
+
+.test {
+  border: 2px solid black;
+}

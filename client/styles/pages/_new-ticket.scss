@@ -1,0 +1,29 @@
+section.new-ticket-heading {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-primary-light, 0.8),
+    rgba($color-primary-dark, 0.8)
+  );
+  padding-top: 1rem;
+  padding-bottom: 0.2rem;
+}
+
+section.new-ticket-form-section {
+  .new-ticket-form {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.7rem;
+    align-items: center;
+    justify-content: center;
+    &__group {
+      display: flex;
+      flex-direction: column;
+      text-transform: uppercase;
+      padding: 2rem;
+      &__input {
+        border: none;
+        outline: none;
+      }
+    }
+  }
+}
